@@ -3,6 +3,8 @@ package com.mycom.jdbc;
 import com.mycom.dao.CandidateDao;
 import com.mycom.entity.Candidate;
 import com.mycom.entity.CandidateCompetence;
+
+import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -33,7 +35,7 @@ public class JdbcCandidateDao implements CandidateDao {
 		candidate.setName(rs.getString(Candidate.NAME_COLUMN));
 		candidate.setSurname(rs.getString(Candidate.SURNAME_COLUMN));
 		candidate.setSalary(rs.getDouble(Candidate.SALARY_COLUMN));
-		candidate.setBirthday(rs.getDate(Candidate.BIRTHDAY_COLUMN));
+		candidate.setBirthday(new DateTime(rs.getDate(Candidate.BIRTHDAY_COLUMN)));
 		candidate.setCandidateState(rs.getString(Candidate.CANDIDATESTATE_COLUMN));
 		candidate.setSkills(jdbccandidatecompetencedao.findSkill(candidate.getId()));
 		return candidate;
@@ -113,7 +115,7 @@ public class JdbcCandidateDao implements CandidateDao {
 			statement.setString(1, candidate.getName());
 			statement.setString(2, candidate.getSurname());
 			statement.setDouble(3, candidate.getSalary());
-			statement.setDate(4, new Date(candidate.getBirthday().getTime()));
+			statement.setDate(4, new Date(candidate.getBirthday().getMillis()));
 			statement.setString(5, candidate.getCandidateState());
 			statement.execute();
 			ResultSet rs = statement.getGeneratedKeys();
@@ -149,7 +151,7 @@ public class JdbcCandidateDao implements CandidateDao {
 			statement.setString(1, candidate.getName());
 			statement.setString(2, candidate.getSurname());
 			statement.setDouble(3, candidate.getSalary());
-			statement.setDate(4, new Date(candidate.getBirthday().getTime()));
+			statement.setDate(4, new Date(candidate.getBirthday().getMillis()));
 			statement.setString(5, candidate.getCandidateState());
 			statement.setLong(6, candidate.getId());
 			statement.execute();

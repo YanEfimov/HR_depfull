@@ -16,6 +16,7 @@
 <h1 align="center">Create interview</h1>
 <div class="user_form">
         <form:form action="SaveInterview" method="post" modelAttribute="interview">
+        <form:hidden path="id"/>
         <table>
             <tr>
                 <td>Name:</td>
@@ -24,12 +25,12 @@
             </tr>
             <tr>
                 <td>PlanDate:</td>
-                <td><form:input path="planDate" /></td>
+                <td><form:input type="date" path="planDate" /></td>
                 <td><form:errors path="planDate"/></td>
             </tr>
             <tr>
                 <td>FactDate:</td>
-                <td><form:input path="factDate"/></td>
+                <td><form:input type="date" path="factDate"/></td>
                 <td><form:errors path="factDate"/></td>
             </tr>
             <tr>

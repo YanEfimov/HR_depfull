@@ -4,6 +4,8 @@ import com.mycom.dao.InterviewDao;
 import com.mycom.entity.Candidate;
 import com.mycom.entity.Interview;
 import com.mycom.entity.Vacancy;
+
+import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -32,8 +34,8 @@ public class JdbcInterviewDao implements InterviewDao {
 	private Interview creater(ResultSet rs) throws SQLException {
 		Interview interview = new Interview();
 		interview.setId(rs.getLong(Interview.ID_COLUMN));
-		interview.setPlanDate(rs.getDate(Interview.PLANDATE_COLUMN));
-		interview.setFactDate(rs.getDate(Interview.FACTDATE_COLUMN));
+		interview.setPlanDate(new DateTime(rs.getDate(Interview.PLANDATE_COLUMN)));
+		interview.setFactDate(new DateTime(rs.getDate(Interview.FACTDATE_COLUMN)));
 		interview.setIdCandidate(rs.getLong(Interview.IDCANDIDATE_COLUMN));
 		interview.setIdVacancy(rs.getLong(Interview.IDVACANCY_COLUMN));
 		interview.setName(rs.getString(Interview.NAME_CLOUMN));
@@ -115,8 +117,8 @@ public class JdbcInterviewDao implements InterviewDao {
 		try {
 			connection = dataSource.getConnection();
 			PreparedStatement statement = connection.prepareStatement(SQL_INSERT);
-			statement.setDate(1,new Date(interview.getPlanDate().getTime()));
-			statement.setDate(2,new Date(interview.getFactDate().getTime()));
+			statement.setDate(1,new Date(interview.getPlanDate().getMillis()));
+			statement.setDate(2,new Date(interview.getFactDate().getMillis()));
 			statement.setLong(3, interview.getIdCandidate());
 			statement.setLong(4, interview.getIdVacancy());
 			statement.setString(5, interview.getName());
@@ -142,8 +144,8 @@ public class JdbcInterviewDao implements InterviewDao {
 		try {
 			connection = dataSource.getConnection();
 			PreparedStatement statement = connection.prepareStatement(SQL_UPDATE);
-			statement.setDate(1,new Date(interview.getPlanDate().getTime()));
-			statement.setDate(2,new Date(interview.getFactDate().getTime()));
+			statement.setDate(1,new Date(interview.getPlanDate().getMillis()));
+			statement.setDate(2,new Date(interview.getFactDate().getMillis()));
 			statement.setLong(3, interview.getIdCandidate());
 			statement.setLong(4, interview.getIdVacancy());
 			statement.setString(5,interview.getName());

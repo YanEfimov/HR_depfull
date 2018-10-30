@@ -69,6 +69,7 @@ public class CandidateController {
 	@RequestMapping(value = "/SaveCandidate", method = RequestMethod.POST)
 	public String SaveCandidate(@Valid Candidate candidate,BindingResult bindingResult, Model model) {
 		if (bindingResult.hasErrors()) {
+			System.out.println(candidate.getBirthday());
 			return CreateCandidateForm(model,candidate);
 		}
 		if (candidate.getId()!=null)

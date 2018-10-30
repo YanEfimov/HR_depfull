@@ -3,7 +3,10 @@ package com.mycom.entity;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
 import javax.validation.constraints.Size;
-import java.util.Date;
+
+import org.springframework.format.annotation.DateTimeFormat;
+
+import org.joda.time.DateTime;;
 
 public class Interview {
 	public static final String TABLE_NAME = "interview";
@@ -17,9 +20,11 @@ public class Interview {
 	
 	private Long id;
 	@NotNull
-	private Date factDate;
-	@NotNull 
-	private Date planDate;
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	private DateTime factDate;
+	@NotNull
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	private DateTime planDate;
 	private long idVacancy;
 	private long idCandidate;
 	@Size(min=5)
@@ -64,16 +69,16 @@ public class Interview {
 	public void setId(Long id) {
 		this.id = id;
 	}
-	public Date getFactDate() {
+	public DateTime getFactDate() {
 		return factDate;
 	}
-	public void setFactDate(Date factDate) {
+	public void setFactDate(DateTime factDate) {
 		this.factDate = factDate;
 	}
-	public Date getPlanDate() {
+	public DateTime getPlanDate() {
 		return planDate;
 	}
-	public void setPlanDate(Date planDate) {
+	public void setPlanDate(DateTime planDate) {
 		this.planDate = planDate;
 	}
 	

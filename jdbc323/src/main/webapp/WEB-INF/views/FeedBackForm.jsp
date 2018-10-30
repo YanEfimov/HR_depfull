@@ -16,6 +16,7 @@
 <h1 align="center">Add Feedback</h1>
 <div class="user_form">
         <form:form action="SaveFeedback" method="post" modelAttribute="feedback">
+        <form:hidden path="id"/>
         <table>
             <tr>
                 <td>Reason:</td>

@@ -1,5 +1,6 @@
 package com.mycom.entity;
 
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 public class FeedBack {
@@ -11,7 +12,7 @@ public class FeedBack {
 	public static final String ID_COLUMN = "id";
 	
 	private Long id;
-	@Size(min=10)
+	@Size(min=1)
 	private String reason;
 	private String feedbackState;
 	private long idInterviewer;

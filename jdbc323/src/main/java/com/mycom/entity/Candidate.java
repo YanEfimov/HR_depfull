@@ -1,8 +1,12 @@
 package com.mycom.entity;
 
 import javax.validation.constraints.*;
-import java.util.Date;
+
+import org.joda.time.DateTime;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.util.List;
+import org.joda.time.*;
 
 
 public class Candidate {
@@ -17,9 +21,9 @@ public class Candidate {
 	private Long id;
 	@DecimalMax("10000.0") @DecimalMin("200") 
 	private double salary;
-    //@DateTimeFormat(pattern="MM/dd/yyyy")
-    @NotNull @Past
-	private Date birthday;
+	@NotNull
+    @DateTimeFormat(pattern="yyyy-MM-dd")
+	private DateTime birthday;
     @Size(min=2)
 	private String surname;
     @Size(min=2)
@@ -47,10 +51,10 @@ public class Candidate {
 	public void setSalary(double salary) {
 		this.salary = salary;
 	}
-	public Date getBirthday() {
+	public DateTime getBirthday() {
 		return birthday;
 	}
-	public void setBirthday(Date birthday) {
+	public void setBirthday(DateTime birthday) {
 		this.birthday = birthday;
 	}
 	public String getSurname() {
